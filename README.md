@@ -29,15 +29,17 @@ Full-stack e-commerce application built with Spring Boot backend and React front
 
 #### Products
 
-GET    /api/products                    # List products (paginated)
-POST   /api/products                    # Create product
-GET    /api/products/{id}               # Get product by ID
-PUT    /api/products/{id}               # Update product
-DELETE /api/products/{id}               # Delete product
-GET    /api/products/search?query=...   # Search products
-GET    /api/products/price-range        # Filter by price
-GET    /api/products/in-stock           # Get available products
-GET    /api/health                      # Health check
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/products` | List products (paginated) |
+| POST | `/api/products` | Create product |
+| GET | `/api/products/{id}` | Get product by ID |
+| PUT | `/api/products/{id}` | Update product |
+| DELETE | `/api/products/{id}` | Delete product |
+| GET | `/api/products/search?query=...` | Search products |
+| GET | `/api/products/price-range` | Filter by price |
+| GET | `/api/products/in-stock` | Get available products |
+| GET | `/api/health` | Health check |
 
 ### Setup Instructions
 
