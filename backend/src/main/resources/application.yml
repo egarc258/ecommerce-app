@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
@@ -19,3 +19,8 @@ server:
 logging:
   level:
     com.ecommerce: DEBUG
+
+app:
+  jwt:
+    secret: myVerySecretKeyForJWTTokenGenerationThatIsLongEnough
+    expiration: 86400000
