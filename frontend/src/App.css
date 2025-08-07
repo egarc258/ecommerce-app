@@ -1,0 +1,9 @@
+/* Remove default Create React App styles */
+.App {
+  text-align: left;
+}
+
+/* Custom styles */
+.container {
+  max-width: 1200px;
+}
