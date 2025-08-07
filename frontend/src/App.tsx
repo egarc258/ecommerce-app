@@ -1,67 +1,80 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import Navbar from './components/common/Navbar';
+import ProtectedRoute from './components/common/ProtectedRoute';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
 import './App.css';
 
 function App() {
   return (
-      <div className="min-h-screen bg-gray-100 py-8">
-        <div className="container mx-auto px-4">
-          <header className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-blue-600 mb-2">
-              🛍️ E-commerce Store
-            </h1>
-            <p className="text-gray-600">
-              Your React frontend connected to Spring Boot backend
-            </p>
-          </header>
+      <AuthProvider>
+        <Router>
+          <div className="min-h-screen bg-gray-100">
+            <Navbar />
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
 
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-lg shadow-md p-8 mb-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                Frontend is Ready! ✨
-              </h2>
+              {/* Protected Routes */}
+              <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <DashboardPage />
+                    </ProtectedRoute>
+                  }
+              />
 
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                  <span>React TypeScript app running</span>
-                </div>
+              {/* Placeholder for future routes */}
+              <Route
+                  path="/products"
+                  element={
+                    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+                      <div className="text-center bg-white p-8 rounded-lg shadow-md">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-4">Products Page</h2>
+                        <p className="text-gray-600">Coming soon! This will show the product catalog.</p>
+                      </div>
+                    </div>
+                  }
+              />
 
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                  <span>Tailwind CSS configured</span>
-                </div>
+              {/* Admin Routes (for future) */}
+              <Route
+                  path="/admin/products"
+                  element={
+                    <ProtectedRoute adminOnly>
+                      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+                        <div className="text-center bg-white p-8 rounded-lg shadow-md">
+                          <h2 className="text-2xl font-bold text-gray-900 mb-4">Admin Products</h2>
+                          <p className="text-gray-600">Coming soon! Admin product management.</p>
+                        </div>
+                      </div>
+                    </ProtectedRoute>
+                  }
+              />
 
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                  <span>Ready to connect to Spring Boot API</span>
-                </div>
-              </div>
-
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
-                  View Products
-                </button>
-
-                <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors">
-                  Login / Register
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-blue-800 mb-2">
-                Next Steps:
-              </h3>
-              <ul className="text-blue-700 space-y-2">
-                <li>• Build authentication pages (Login/Register)</li>
-                <li>• Create product catalog connected to your API</li>
-                <li>• Add shopping cart functionality</li>
-                <li>• Implement user dashboard</li>
-              </ul>
-            </div>
+              {/* 404 Page */}
+              <Route
+                  path="*"
+                  element={
+                    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+                      <div className="text-center">
+                        <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
+                        <p className="text-gray-600">Page not found</p>
+                      </div>
+                    </div>
+                  }
+              />
+            </Routes>
           </div>
-        </div>
-      </div>
+        </Router>
+      </AuthProvider>
   );
 }
 
